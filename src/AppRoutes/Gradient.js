@@ -10,7 +10,6 @@ export default class Gradient extends Component {
 	}
 
 	componentWillReceiveProps(newProps){
-		console.log("reciveprops", newProps);
 		let gradient, background;
 		if(newProps.colors.length > 1){
 			gradient = "linear-gradient(to right, " + newProps.colors.join(", ") + " )";		
@@ -20,7 +19,6 @@ export default class Gradient extends Component {
 	}
 
 	render(){
-		console.log("renderGradient", this.state.style);
 		return(
 			<div style={this.state.style} className="colorDisplay">
 			</div>

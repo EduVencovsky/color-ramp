@@ -1,21 +1,66 @@
+button:focus {
+	outline: 0;
+}
+
 .colorDisplay {
-	width: 500px;
+	width: 99.5%;
 	height: 25px;
 	border: 1px black solid;
 	margin: 3px 0px;
 }
 
-.test{
-	background-color: yellow;
+.hundredp {
+	width: 100%;
+}
+
+.deleteButton {
+	background-image: url("icons/trashcan-icon.png");
+	background-size: 25px 25px;
+	background-color: transparent;
+	width: 25px;
+	height: 25px;
+	background-repeat: no-repeat;
+	border: none;
+}
+
+.editButton {
+	background-image: url("icons/edit-icon.png");
+	background-size: 25px 25px;
+	background-color: transparent;
+	width: 25px;
+	height: 25px;
+	background-repeat: no-repeat;
+	border: none;
+}
+.dragHandle {	
+	background-image: url("icons/drag-icon.png");
+	background-size: 25px 25px;
+	width: 25px;
+	height: 30px;
+	background-color: transparent;
+	background-repeat: no-repeat;
 }
 
 .flexBox {
 	display: flex;
 }
 
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.red {
+	color: red;
+}
+
 .colorTable, .colorTable td {
 	border: 2px #EBEDF0 solid;
 	border-collapse: collapse;
+	text-align: center;
 }
 
 .colorTable th {
@@ -25,19 +70,22 @@
 }
 
 .mainContent {
-	width: 50%;
+	width: 75%;
 	margin: auto;
-}
-.cell {
-	background-color: white;
 }
 
 .inputField {
 	width: 500px;
 }
 
-.link {
-	display: inline-block;
+.nameCell{
+	width: 20%;
+}
+.previewCell{
+	width: 70%;
+}
+.buttonCell{
+	width: 5%;
 }
 
 .addButton {

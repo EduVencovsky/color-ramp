@@ -36,17 +36,15 @@ export default class ColorRampList extends Component {
 	render(){
 		return(
 			<div>
-				<div className="flexBox">
-					<h4>Rampa de Cores</h4>
-					<CustomButton className={"addButton"} onClick={() => this.props.history.push('/new')} label="Adicionar"/>
-				</div>
-				<table className="colorTable">
+				<h2 className="left">Rampas de Cores</h2>
+				<CustomButton className="addButton right" onClick={() => this.props.history.push('/new')} label="Adicionar"/>
+				<table className="colorTable hundredp">
 					<tbody>
 						<tr>
-							<th>Nome</th>
-							<th>Pré-visualização</th>
-							<th>     </th>
-							<th>     </th>
+							<th className="nameCell">Nome</th>
+							<th className="previewCell">Pré-visualização</th>
+							<th className="buttonCell">     </th>
+							<th className="buttonCell">     </th>
 						</tr>
 						{
 							this.state.colorList.map(function(colors){							
@@ -55,26 +53,21 @@ export default class ColorRampList extends Component {
 											<td className="nameCell">
 												{colors.name}
 											</td>
-											<td>										
+											<td className="previewCell">										
 												<Gradient colors={colors.colors}/>
 											</td>
-											<td>
-												<CustomButton label="Edit" onClick={() => this.props.history.push('/new/' + colors.id)}/>
+											<td className="buttonCell">
+												<CustomButton className="editButton" onClick={() => this.props.history.push('/new/' + colors.id)}/>
 											</td>
-											<td>
-												<CustomButton label="Delete" onClick={this.handleButtonClick.bind(this,"destroy", colors.id)}/>
+											<td className="buttonCell">
+												<CustomButton className="deleteButton" onClick={this.handleButtonClick.bind(this,"destroy", colors.id)}/>
 											</td>
 										</tr>
 									);
 							}.bind(this))
 						}
 					</tbody>
-				</table>
-				
-					
-				<div>
-					
-				</div>
+				</table>					
 			</div>
 		);
 	}

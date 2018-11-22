@@ -27,7 +27,7 @@ export default class ColorPicker extends Component {
 	};
 
 	render(){
-		let picker = "";
+		let picker;
 		if(this.state.showColorPicker){
 			picker = <SketchPicker color={this.state.style.backgroundColor} onChangeComplete={this.handleChangeComplete} />
 		}
@@ -35,8 +35,8 @@ export default class ColorPicker extends Component {
 			<div className="colorPicker">
 				<div className="flexBox">
 					<div onClick={this.handleClick} className="colorDisplay" style={this.state.style} />				
-					<div className="dragHandle" data-id={this.props.dataId} onDragEnd={this.props.onDragEnd} onDragStart={this.props.onDragStart} draggable='true'> === </div>
-					<CustomButton onClick={this.props.onPublishEvent} label="Delete" />
+					<div className="dragHandle" data-id={this.props.dataId} onDragEnd={this.props.onDragEnd} onDragStart={this.props.onDragStart} draggable='true' />
+					<CustomButton className="deleteButton" onClick={this.props.onPublishEvent} label="" />
 				</div>
 				{picker}
 			</div>

@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Input from './Input.js';
+import Label from './Label.js';
 import ColorInput from './ColorInput.js';
 import Gradient from './Gradient.js';
 import ColorPicker from './ColorPicker.js';
 import CustomButton from './CustomButton.js';
 import PubSub from 'pubsub-js';
 import ServerRequester from '../ServerRequester.js';
-
+import PubError from '../PubError/PubError.js';
 
 var placeholder = document.createElement("div");
 placeholder.className = "colorDisplay";
@@ -78,7 +79,7 @@ class List extends Component {
       		)
  		});
 		return(
-			<div onDragOver={this.dragOver.bind(this)}>
+			<div className="divp" onDragOver={this.dragOver.bind(this)}>
 				{listItems}
 			</div>
 		);
@@ -92,7 +93,7 @@ export default class Form extends Component {
 		super();
 		this.state = {
 					name: "",
-					colors: []
+					colors: ['white']
 				};
 		this.handleEvents = this.handleEvents.bind(this);
 	}
@@ -105,7 +106,6 @@ export default class Form extends Component {
 			.then(function(response){
 				this.setState({name: response.name, colors: response.colors});
 			}.bind(this));
-			console.log("newstate");
 		} 
 		PubSub.subscribe("updateColor", function(topic, param){
 			let c = this.state.colors;
@@ -132,24 +132,34 @@ export default class Form extends Component {
 	}
 	
 	save(param){
-		if(this.state.colors.length < 2 || this.state.name == ""){
-			///throw exception
-			console.log("exception");
-		} else {
+		let errors = [];
+		let pubError = new PubError();
+		pubError.publish("cleanFormError", [""]);
+
+		if(this.state.colors.length < 2){
+			errors.push("colors");
+		} 
+		if(this.state.name.trim() == ""){
+			errors.push("name");
+		} 
+		
+		new PubError().publish("formError", errors);
+
+		if(errors.length == 0){
 			let s = new ServerRequester();
 			let action = "create";
-			let param = {data: this.state};
+			let p = {data: this.state};
 			if(this.props.match.params.id){
 				let id = this.props.match.params.id;
 				action = "update";
-				param = {data: this.state, id: id};
+				p = {data: this.state, id: id};
 			}
-			s.setResquest(action, param)
+			s.setResquest(action, p)
 			.then(function(response){
 				this.props.history.push('/');
 			}.bind(this));
-
 		}
+
 	}
 
 	handleEvents(action, param, event){
@@ -161,14 +171,14 @@ export default class Form extends Component {
 	}
 
 	render(){
-		console.log("render", this.state.colors);
 		return(
 			<div>
-				<Input onChange={this.handleChange.bind(this)} value={this.state.name} name="Nome" label="Nome"/>
+				<Label label="Nome" name="name" />
+				<Input onChange={this.handleChange.bind(this)} value={this.state.name} name="name"/>
 				<label>Pré-visualização</label>
 				<Gradient colors={this.state.colors}/>				
-				<label>Cores</label>
-				<table>
+				<Label label="Cores" name="colors" />
+				<table className="hundredp">
 					<tbody>
 						<tr>
 							<td>
