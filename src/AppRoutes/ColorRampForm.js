@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Input from './Input.js';
-import Label from './Label.js';
-import ColorInput from './ColorInput.js';
-import Gradient from './Gradient.js';
-import ColorPicker from './ColorPicker.js';
-import CustomButton from './CustomButton.js';
 import PubSub from 'pubsub-js';
+
+import Input from '../Components/Input.js';
+import Label from '../Components/Label.js';
+import Gradient from '../Components/Gradient.js';
+import ColorPicker from '../Components/ColorPicker.js';
+import Button from '../Components/Button.js';
 import ServerRequester from '../ServerRequester.js';
 import PubError from '../PubError/PubError.js';
 
@@ -139,21 +139,24 @@ export default class Form extends Component {
 		if(this.state.colors.length < 2){
 			errors.push("colors");
 		} 
-		if(this.state.name.trim() == ""){
+		if(this.state.name.trim() === ""){
 			errors.push("name");
 		} 
 		
 		new PubError().publish("formError", errors);
+		
+		if(errors.length === 0){
 
-		if(errors.length == 0){
 			let s = new ServerRequester();
 			let action = "create";
 			let p = {data: this.state};
+
 			if(this.props.match.params.id){
 				let id = this.props.match.params.id;
 				action = "update";
 				p = {data: this.state, id: id};
 			}
+			
 			s.setResquest(action, p)
 			.then(function(response){
 				this.props.history.push('/');
@@ -187,14 +190,14 @@ export default class Form extends Component {
 						</tr>
 						<tr>
 							<td>
-								<CustomButton onClick={this.handleEvents.bind(this,"addColor", {})} className={"addButton"} label="Adicionar" />
+								<Button onClick={this.handleEvents.bind(this,"addColor", {})} className={"addButton"} label="Adicionar" />
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div className="flexBox">	
-					<CustomButton onClick={this.handleEvents.bind(this,"save", {})} className="addButton" label={"Salvar"} />
-					<CustomButton onClick={() => this.props.history.push('/')} className="cancelButton" label={"Cancelar"} />
+					<Button onClick={this.handleEvents.bind(this,"save", {})} className="addButton" label={"Salvar"} />
+					<Button onClick={() => this.props.history.push('/')} className="cancelButton" label={"Cancelar"} />
 				</div>
 
 			</div>

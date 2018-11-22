@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom';
+
 import ServerRequester from '../ServerRequester.js';
-import Gradient from "./Gradient.js";
-import CustomButton from "./CustomButton.js";
+import Gradient from "../Components/Gradient.js";
+import Button from "../Components/Button.js";
 
 export default class ColorRampList extends Component {
 
@@ -37,7 +37,7 @@ export default class ColorRampList extends Component {
 		return(
 			<div>
 				<h2 className="left">Rampas de Cores</h2>
-				<CustomButton className="addButton right" onClick={() => this.props.history.push('/new')} label="Adicionar"/>
+				<Button className="addButton right" onClick={() => this.props.history.push('/new')} label="Adicionar"/>
 				<table className="colorTable hundredp">
 					<tbody>
 						<tr>
@@ -57,10 +57,10 @@ export default class ColorRampList extends Component {
 												<Gradient colors={colors.colors}/>
 											</td>
 											<td className="buttonCell">
-												<CustomButton className="editButton" onClick={() => this.props.history.push('/new/' + colors.id)}/>
+												<Button className="editButton" onClick={() => this.props.history.push('/new/' + colors.id)}/>
 											</td>
 											<td className="buttonCell">
-												<CustomButton className="deleteButton" onClick={this.handleButtonClick.bind(this,"destroy", colors.id)}/>
+												<Button className="deleteButton" onClick={this.handleButtonClick.bind(this,"destroy", colors.id)}/>
 											</td>
 										</tr>
 									);

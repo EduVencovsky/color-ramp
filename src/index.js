@@ -6,7 +6,7 @@ import App from './App';
 import ColorRampForm from './AppRoutes/ColorRampForm.js';
 import ColorRampList from './AppRoutes/ColorRampList.js';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router, Route,Switch,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
 
 
 ReactDOM.render(
