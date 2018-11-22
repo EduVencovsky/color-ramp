@@ -8,7 +8,10 @@ export default class ColorRampList extends Component {
 
 	constructor(){
 		super();
-		this.state = {colorList: []};
+		this.state = {
+						colorList: [],
+						error: {message: ""}	
+					};
 		this.handleButtonClick = this.handleButtonClick.bind(this);		
 		this.loadColorList = this.loadColorList.bind(this);
 	}
@@ -20,8 +23,11 @@ export default class ColorRampList extends Component {
 	loadColorList(){
 		let request = new ServerRequester();
 		request.setResquest("getAll", {})
-		.then(function(e){
-			this.setState({colorList: e});
+		.then(function(response){
+			this.setState({colorList: response, error:{message: ""}});
+		}.bind(this))
+		.catch(function(error){
+			this.setState({error: {message: "Fail to connect with DataBase."}});
 		}.bind(this));
 	}
 
@@ -36,7 +42,7 @@ export default class ColorRampList extends Component {
 	render(){
 		return(
 			<div>
-				<h2 className="left">Rampas de Cores</h2>
+				<h2 className="left">Rampas de Cores</h2>				
 				<Button className="addButton right" onClick={() => this.props.history.push('/new')} label="Adicionar"/>
 				<table className="colorTable hundredp">
 					<tbody>
@@ -67,7 +73,8 @@ export default class ColorRampList extends Component {
 							}.bind(this))
 						}
 					</tbody>
-				</table>					
+				</table>
+				<span className="red">{this.state.error.message}</span>
 			</div>
 		);
 	}

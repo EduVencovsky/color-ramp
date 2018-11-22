@@ -93,7 +93,8 @@ export default class Form extends Component {
 		super();
 		this.state = {
 					name: "",
-					colors: ['white']
+					colors: ['white'],
+					error: {message: ""}
 				};
 		this.handleEvents = this.handleEvents.bind(this);
 	}
@@ -104,7 +105,10 @@ export default class Form extends Component {
 			let g = new ServerRequester();
 			g.setResquest("getOne", {id: id})
 			.then(function(response){
-				this.setState({name: response.name, colors: response.colors});
+				this.setState({name: response.name, colors: response.colors, error:{message: ""}});
+			}.bind(this))
+			.catch(function(error){
+				this.setState({error: {message: "Fail to connect with DataBase."}});
 			}.bind(this));
 		} 
 		PubSub.subscribe("updateColor", function(topic, param){
@@ -159,7 +163,11 @@ export default class Form extends Component {
 			
 			s.setResquest(action, p)
 			.then(function(response){
+				this.setState({error: {message: ""}});
 				this.props.history.push('/');
+			}.bind(this))
+			.catch(function(error){
+				this.setState({error: {message: "Fail to connect with DataBase."}});
 			}.bind(this));
 		}
 
@@ -199,7 +207,7 @@ export default class Form extends Component {
 					<Button onClick={this.handleEvents.bind(this,"save", {})} className="addButton" label={"Salvar"} />
 					<Button onClick={() => this.props.history.push('/')} className="cancelButton" label={"Cancelar"} />
 				</div>
-
+				<span className="red">{this.state.error.message}</span>
 			</div>
 		);
 	}
