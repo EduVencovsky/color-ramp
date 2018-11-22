@@ -1,34 +1,31 @@
 {
   "colorList": [
     {
-      "name": "Degrade 122",
+      "name": "5 Faixas Menor - Maior",
+      "colors": [
+        "#ff001f",
+        "#f5a623",
+        "#f8e71c",
+        "#7ed321",
+        "#417505"
+      ],
+      "id": 1
+    },
+    {
+      "name": "Bolha",
       "colors": [
         "#7ed321",
         "#f8e71c",
-        "#f70808"
+        "#50e3c2",
+        "#d0021b"
       ],
       "id": 2
-    },
-    {
-      "name": "asdasdasd",
-      "colors": [
-        "#122aff",
-        "#ee1111",
-        "#7ed321"
-      ],
-      "id": 3
-    },
-    {
-      "name": "asdasdasd",
-      "colors": [
-        "#122aff",
-        "#ee1111",
-        "#7ed321"
-      ],
-      "id": 4
     }
   ],
-  "profile": {
-    "name": "typicode"
+  "autor": {
+    "name": "Eduardo Vencovsky",
+    "email": "eduvencovsky@gmail.com",
+    "github": "https://github.com/EduVencovsky",
+    "favoriteColor": "#50e3c2"
   }
 }
